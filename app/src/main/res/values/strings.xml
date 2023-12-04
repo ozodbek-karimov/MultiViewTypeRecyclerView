@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MultiViewTypeRecyclerView</string>
+    <string name="top_masters">Top Masters</string>
+</resources>
