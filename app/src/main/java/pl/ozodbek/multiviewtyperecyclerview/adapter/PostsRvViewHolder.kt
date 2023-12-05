@@ -26,7 +26,6 @@ sealed class PostsRvViewHolder(binding: ViewBinding) :
 
         override fun bind(data: PostsRvItem) {
             val title = data as PostsRvItem.Titles
-
             binding.titleTv.text = title.title
         }
 

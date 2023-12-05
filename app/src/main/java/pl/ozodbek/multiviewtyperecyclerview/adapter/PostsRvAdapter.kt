@@ -4,7 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import pl.ozodbek.multiviewtyperecyclerview.R
+import pl.ozodbek.multiviewtyperecyclerview.utils.Constants.Companion.LAYOUT_EMPTY_SPACE
+import pl.ozodbek.multiviewtyperecyclerview.utils.Constants.Companion.LAYOUT_TITLES
+import pl.ozodbek.multiviewtyperecyclerview.utils.Constants.Companion.LAYOUT_TOP_POSTS
+import pl.ozodbek.multiviewtyperecyclerview.utils.Constants.Companion.LAYOUT_TOP_RECOMMENDED
 
 class PostsRvAdapter :
     ListAdapter<PostsRvItem, PostsRvViewHolder>(SearchRecyclerViewDiffUtil()) {
@@ -14,16 +17,19 @@ class PostsRvAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsRvViewHolder {
         return when (viewType) {
 
-            R.layout.top_posts_row_item -> PostsRvViewHolder.TopPostsViewHolder.create(
+            LAYOUT_TOP_POSTS -> PostsRvViewHolder.TopPostsViewHolder.create(
                 parent
             )
-            R.layout.top_recommendeds_row_item -> PostsRvViewHolder.TopMastersViewHolder.create(
+
+            LAYOUT_TOP_RECOMMENDED -> PostsRvViewHolder.TopMastersViewHolder.create(
                 parent
             )
-            R.layout.titles_row_item -> PostsRvViewHolder.TitlesViewHolder.create(
+
+            LAYOUT_TITLES -> PostsRvViewHolder.TitlesViewHolder.create(
                 parent
             )
-            R.layout.empty_space -> PostsRvViewHolder.EmptySpaceViewHolder.create(parent)
+
+            LAYOUT_EMPTY_SPACE -> PostsRvViewHolder.EmptySpaceViewHolder.create(parent)
 
             else -> throw IllegalArgumentException("Invalid ViewType Provided")
         }
@@ -38,10 +44,10 @@ class PostsRvAdapter :
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is PostsRvItem.TopPosts -> R.layout.top_posts_row_item
-            is PostsRvItem.TopRecommended -> R.layout.top_recommendeds_row_item
-            is PostsRvItem.Titles -> R.layout.titles_row_item
-            is PostsRvItem.EmptySpace -> R.layout.empty_space
+            is PostsRvItem.TopPosts -> LAYOUT_TOP_POSTS
+            is PostsRvItem.TopRecommended -> LAYOUT_TOP_RECOMMENDED
+            is PostsRvItem.Titles -> LAYOUT_TITLES
+            is PostsRvItem.EmptySpace -> LAYOUT_EMPTY_SPACE
         }
     }
 

@@ -1,4 +1,4 @@
-package pl.ozodbek.multiviewtyperecyclerview
+package pl.ozodbek.multiviewtyperecyclerview.ui
 
 import android.os.Bundle
 import android.view.View
@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     /** SETTING UP RECYCLERVIEW */
     private fun setupRecyclerView() {
         binding.postsRecyclerview.adapter = postsRvAdapter
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             handleItemClick(view, item)
         }
     }
+
 
 
 
@@ -56,10 +58,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     /** SETTING UP SNACKBAR FOR RECOMMENDED POSTS */
     private fun handleTopRecommendedClick(item: PostsRvItem.TopRecommended, view: View) {
         Snackbar.make(view, "${item.topMasters.id} master clicked", Snackbar.LENGTH_SHORT).show()
     }
+
 
 
     /** SETTING UP SNACKBAR FOR TOP POSTS */
@@ -69,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             2 -> Snackbar.make(view, "2st Image clicked", Snackbar.LENGTH_SHORT).show()
         }
     }
+
 
 
     /** CREATING ORDERS OF VIEW TYPES */
@@ -95,6 +100,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     /** GENERATING DUMMY TOP POSTS */
     private fun generateTopPosts(): List<PostsRvItem.TopPosts> {
         return listOf(
@@ -103,6 +109,7 @@ class MainActivity : AppCompatActivity() {
         )
 
     }
+
 
 
     /** GENERATING DUMMY TOP RECOMMENDED POSTS */

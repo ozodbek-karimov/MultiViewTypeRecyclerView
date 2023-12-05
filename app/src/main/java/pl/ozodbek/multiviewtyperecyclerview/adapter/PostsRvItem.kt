@@ -15,7 +15,9 @@ sealed interface PostsRvItem {
         val topMasters: TopRecommendedsList
     ) : PostsRvItem
 
+
     data class Titles(val id: Int, val title: String) : PostsRvItem
+
 
     data class EmptySpace(val id: Int) : PostsRvItem
 
