@@ -11,7 +11,7 @@ sealed interface PostsRvItem {
     ) : PostsRvItem
 
 
-    data class TopRecommendeds(
+    data class TopRecommended(
         val topMasters: TopRecommendedsList
     ) : PostsRvItem
 

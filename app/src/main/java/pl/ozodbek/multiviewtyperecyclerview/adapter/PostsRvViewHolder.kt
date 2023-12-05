@@ -66,7 +66,7 @@ sealed class PostsRvViewHolder(binding: ViewBinding) :
         PostsRvViewHolder(binding) {
 
         override fun bind(data: PostsRvItem) {
-            val topMaster = data as PostsRvItem.TopRecommendeds
+            val topMaster = data as PostsRvItem.TopRecommended
 
             val data = topMaster.topMasters
 

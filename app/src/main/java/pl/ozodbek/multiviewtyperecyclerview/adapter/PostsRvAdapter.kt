@@ -39,7 +39,7 @@ class PostsRvAdapter :
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is PostsRvItem.TopPosts -> R.layout.top_posts_row_item
-            is PostsRvItem.TopRecommendeds -> R.layout.top_recommendeds_row_item
+            is PostsRvItem.TopRecommended -> R.layout.top_recommendeds_row_item
             is PostsRvItem.Titles -> R.layout.titles_row_item
             is PostsRvItem.EmptySpace -> R.layout.empty_space
         }
