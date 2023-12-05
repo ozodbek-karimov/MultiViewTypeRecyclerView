@@ -17,7 +17,7 @@ class PostsRvAdapter :
             R.layout.top_posts_row_item -> PostsRvViewHolder.TopPostsViewHolder.create(
                 parent
             )
-            R.layout.top_masters_row_item -> PostsRvViewHolder.TopMastersViewHolder.create(
+            R.layout.top_recommendeds_row_item -> PostsRvViewHolder.TopMastersViewHolder.create(
                 parent
             )
             R.layout.titles_row_item -> PostsRvViewHolder.TitlesViewHolder.create(
@@ -39,7 +39,7 @@ class PostsRvAdapter :
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is PostsRvItem.TopPosts -> R.layout.top_posts_row_item
-            is PostsRvItem.TopMasters -> R.layout.top_masters_row_item
+            is PostsRvItem.TopRecommendeds -> R.layout.top_recommendeds_row_item
             is PostsRvItem.Titles -> R.layout.titles_row_item
             is PostsRvItem.EmptySpace -> R.layout.empty_space
         }

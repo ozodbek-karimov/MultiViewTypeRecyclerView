@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import pl.ozodbek.multiviewtyperecyclerview.databinding.EmptySpaceBinding
 import pl.ozodbek.multiviewtyperecyclerview.databinding.TitlesRowItemBinding
-import pl.ozodbek.multiviewtyperecyclerview.databinding.TopMastersRowItemBinding
 import pl.ozodbek.multiviewtyperecyclerview.databinding.TopPostsRowItemBinding
+import pl.ozodbek.multiviewtyperecyclerview.databinding.TopRecommendedsRowItemBinding
 import pl.ozodbek.multiviewtyperecyclerview.utils.loadImage
 import pl.ozodbek.multiviewtyperecyclerview.utils.onClick
 import pl.ozodbek.multiviewtyperecyclerview.utils.viewBinding
@@ -62,23 +62,27 @@ sealed class PostsRvViewHolder(binding: ViewBinding) :
     }
 
 
-    class TopMastersViewHolder private constructor(private val binding: TopMastersRowItemBinding) :
+    class TopMastersViewHolder private constructor(private val binding: TopRecommendedsRowItemBinding) :
         PostsRvViewHolder(binding) {
 
         override fun bind(data: PostsRvItem) {
-            val topMasters = data as PostsRvItem.TopMasters
-            binding.imageView.loadImage(topMasters.image)
-            binding.firstnameTv.text = topMasters.firstName
-            binding.lastNameTv.text = topMasters.lastName
-            binding.completedTasksTv.text = topMasters.completedTasks
+            val topMaster = data as PostsRvItem.TopRecommendeds
+
+            val data = topMaster.topMasters
+
+            binding.imageView.loadImage(data.image)
+            binding.firstnameTv.text = data.firstName
+            binding.lastNameTv.text = data.lastName
+            binding.completedTasksTv.text = data.completedTasks
+
             binding.container.onClick {
-                itemClickListener?.invoke(it, topMasters, adapterPosition)
+                itemClickListener?.invoke(it, data, adapterPosition)
             }
         }
 
         companion object {
             fun create(parent: ViewGroup): TopMastersViewHolder {
-                return TopMastersViewHolder(parent.viewBinding(TopMastersRowItemBinding::inflate))
+                return TopMastersViewHolder(parent.viewBinding(TopRecommendedsRowItemBinding::inflate))
             }
         }
     }
