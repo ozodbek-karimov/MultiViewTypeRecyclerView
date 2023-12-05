@@ -1,6 +1,7 @@
 package pl.ozodbek.multiviewtyperecyclerview
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import pl.ozodbek.multiviewtyperecyclerview.adapter.PostsRvAdapter
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
     }
 
+    /** SETTING UP ACTION BAR */
     private fun setupActionBar() {
         this.setSupportActionBar(binding.toolbar)
         this.title = "MultiViewTypeRecyclerView"
@@ -33,39 +35,43 @@ class MainActivity : AppCompatActivity() {
 
 
     /** SETTING UP RECYCLERVIEW */
-
     private fun setupRecyclerView() {
         binding.postsRecyclerview.adapter = postsRvAdapter
         postsRvAdapter.submitList(generateMultiViewTypeRecyclerview())
 
-
-        /** SETTING UP CLICK LISTENERS FOR VIEW ITEMS */
         postsRvAdapter.itemClickListener = { view, item, _ ->
-            when (item) {
+            handleItemClick(view, item)
+        }
+    }
 
-                is PostsRvItem.TopPosts -> {
-                    when (item.id) {
-                        1 -> {
-                            Snackbar.make(view, "1st Image clicked", Snackbar.LENGTH_SHORT).show()
-                        }
 
-                        2 -> {
-                            Snackbar.make(view, "2st Image clicked", Snackbar.LENGTH_SHORT).show()
-                        }
-                    }
-                }
 
-                is TopRecommendedsList -> {
-                    Snackbar.make(view, "${item.id} master clicked", Snackbar.LENGTH_SHORT).show()
-                }
+    /** SETTING UP CLICK LISTENERS FOR VIEW ITEMS */
+    private fun handleItemClick(view: View, item: Any) {
+        when (item) {
+            is PostsRvItem.TopPosts -> handleTopPostsClick(item, view)
+            is PostsRvItem.TopRecommended -> handleTopRecommendedClick(item, view)
+            else -> {}
+        }
+    }
 
-            }
+
+    /** SETTING UP SNACKBAR FOR RECOMMENDED POSTS */
+    private fun handleTopRecommendedClick(item: PostsRvItem.TopRecommended, view: View) {
+        Snackbar.make(view, "${item.topMasters.id} master clicked", Snackbar.LENGTH_SHORT).show()
+    }
+
+
+    /** SETTING UP SNACKBAR FOR TOP POSTS */
+    private fun handleTopPostsClick(item: PostsRvItem.TopPosts, view: View) {
+        when (item.id) {
+            1 -> Snackbar.make(view, "1st Image clicked", Snackbar.LENGTH_SHORT).show()
+            2 -> Snackbar.make(view, "2st Image clicked", Snackbar.LENGTH_SHORT).show()
         }
     }
 
 
     /** CREATING ORDERS OF VIEW TYPES */
-
     private fun generateMultiViewTypeRecyclerview(): List<PostsRvItem> {
         val items = mutableListOf<PostsRvItem>()
 
@@ -89,8 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    /** GENERATING DUMMY DATAS */
-
+    /** GENERATING DUMMY TOP POSTS */
     private fun generateTopPosts(): List<PostsRvItem.TopPosts> {
         return listOf(
             PostsRvItem.TopPosts(1, "https://picsum.photos/130/300"),
@@ -99,6 +104,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    /** GENERATING DUMMY TOP RECOMMENDED POSTS */
     private fun generateTopMasters(): List<PostsRvItem.TopRecommended> {
         return listOf(
             TopRecommendedsList(
